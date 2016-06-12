@@ -10,7 +10,6 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import ru.outofrange.model.Session;
 import ru.outofrange.model.Token;
 import ru.outofrange.model.User;
 
