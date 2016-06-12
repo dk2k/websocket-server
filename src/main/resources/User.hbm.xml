@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+ <meta attribute="class-description">
+         This class contains the user detail. 
+ </meta>
+ 
+ <class name="ru.outofrange.model.User" table="USER">
+ <cache usage="read-write"/>
+ <id name="id" type="long" column="USER_ID" >
+ 	 <generator class="native"/> 
+ </id>
+ <property name="username" type="java.lang.String">
+ 	<column name="USERNAME" length="100" not-null="true" unique="true"/>
+ </property>
+ <property name="password" type="java.lang.String" >
+ 	<column name="PASSWORD" length="20" not-null="true"/>
+ </property>
+ 
+<set name="tokens" table="TOKENS" 
+	inverse="true" lazy="true" fetch="select">
+    <key>
+         <column name="TOKEN_ID" not-null="true" />
+    </key>
+    <one-to-many class="ru.outofrange.model.Token" />
+</set>
+ 
+ </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+ <meta attribute="class-description">
+         This class contains the token detail. 
+ </meta>
+ 
+ <class name="ru.outofrange.model.Token" table="TOKENS">
+ <cache usage="read-write"/>
+ <id name="id" type="long" column="TOKEN_ID" >
+ 	 <generator class="native"/> 
+ </id>
+ 
+ <property name="token" type="java.lang.String">
+ 	<column name="TOKEN" length="100" not-null="true" unique="true"/>
+ </property>
+ 
+ <property name="date" type="java.util.Date" not-null="false">
+ 	<column name="DATE" sql-type="timestamp" default="now()" not-null="true"/>
+ </property>
+
+<many-to-one name="user" class="ru.outofrange.model.User" fetch="select">
+    <column name="USER_ID" not-null="true" />
+</many-to-one>
+ 
+<property name="valid"  type="yes_no" column="VALID" not-null="true"/>
+ 
+ </class>
+</hibernate-mapping>

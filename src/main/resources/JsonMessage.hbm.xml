@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+ <meta attribute="class-description">
+         This class contains the action detail. 
+ </meta>
+ 
+ <class name="ru.outofrange.model.JsonMessage" table="MESSAGE">
+ <cache usage="read-write"/>
+ <id name="id" type="long" column="MESSAGE_ID" >
+ 	 <generator class="native"/> 
+ </id>
+ 
+ <property name="sequence_id" type="java.lang.String">
+ 	<column name="SEQUENCE_ID" length="100" not-null="true"/>
+ </property>
+ 
+<property name="type" column="TYPE">
+    <type name="org.hibernate.type.EnumType">
+        <param name="enumClass">ru.outofrange.model.MessageType</param>
+    	<param name="useNamed">true</param>
+    </type>
+</property>
+
+<map name="data" table="DATA" cascade="all" lazy="false">  
+	<key column="MESSAGE_ID"></key> <!-- ID of table MESSAGE -->
+	<index column="KEY_" type="string"></index>  
+	<element column="VALUE_" type="string"></element>  
+</map>  
+
+<many-to-one name="session" class="ru.outofrange.model.Session" fetch="select">
+    <column name="SESSION_ID" not-null="true" />
+</many-to-one>
+
+ </class>
+</hibernate-mapping>
